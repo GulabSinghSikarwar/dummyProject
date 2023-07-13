@@ -1,0 +1,29 @@
+.market-watch-container {
+    display: flex;
+    height: 32.75rem;
+
+    .left-container {
+
+        flex: 40%;
+        background-color: aliceblue;
+
+        .form-group{
+            display: flex;
+            // justify-content: space-evenly;
+
+           input{
+            flex: 20%;
+           } 
+           button{
+            flex-direction: 80% ;
+           }
+        }
+
+    }
+
+
+    .right-container {
+        flex: 60%;
+    }
+
+}
