@@ -1,0 +1,46 @@
+.headerContainer {
+    padding: 1vw 0vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kiteIconContainer img {
+    width: 40px;
+}
+
+ul.header {
+    list-style: none;
+    // background-color: #e4dcdc;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+ul.header li {
+    float: right;
+}
+
+ul.header li a {
+    display: block;
+    text-align: center;
+    padding: .75vw 2vw;
+    text-decoration: none;
+    color: #444;
+    font-size: .85rem;
+    font-family: 'Roboto', sans-serif;
+
+
+}
+
+.activeLink {
+    color: #ff5722;
+
+}
+
+ul.header li a:hover,
+ul.header li a.active {
+    color: #ff5722;
+
+}
