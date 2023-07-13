@@ -4,7 +4,7 @@ import { MarketDepthComponent } from 'src/Components/market-depth/market-depth.c
 
 const routes: Routes = [
   {
-    path:"/market-depth",component:MarketDepthComponent,
+    path:"market-depth",component:MarketDepthComponent,
     
   } 
 ];

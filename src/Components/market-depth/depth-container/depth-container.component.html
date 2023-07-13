@@ -1,1 +1,25 @@
 <p>depth-container works!</p>
+<table>
+
+    <tr>
+        <th colspan="6"> {{staock_name}} </th>
+
+    </tr>
+    <tr>
+        <th>MktVol</th>
+        <th>MyVol</th>
+        <th>Bid</th>
+        <th>Ask</th>
+        <th>MyVol</th>
+        <th>MktVol</th>
+    </tr>
+
+    <tr *ngFor="let  data of buy_depthData;let i =index ">
+        <td [style]="{color:'green'}">{{data.marketVol}}</td>
+        <td> </td>
+        <td [style]="{color:'green'}">{{data.bid}} </td>
+        <td [style]="{color:'red'}"> {{sell_depth[i].ask}} </td>
+        <td></td>
+        <td [style]="{color:'red'}"> {{sell_depth[i].marketVol}} </td>
+    </tr>
+</table>
