@@ -11,13 +11,15 @@ import { HeaderComponent } from 'src/Components/header/header.component';
 import { FinnhubServiceService } from 'src/Services/finnhub-service.service';
 import { DepthContainerComponent } from 'src/Components/market-depth/depth-container/depth-container.component';
 import { ScalperContainerComponent } from 'src/Components/market-depth/scalper-container/scalper-container.component';
+import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MarketDepthComponent,
     DepthContainerComponent,
-    ScalperContainerComponent
+    ScalperContainerComponent,
+    MarketWatchComponent
   ],
   imports: [
     BrowserModule,
