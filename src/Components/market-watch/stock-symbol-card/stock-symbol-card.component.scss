@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:wght@100;200;300;400;500&family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Silkscreen:wght@400;700&display=swap');
+
+.stock_card_container {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0rem;
+    color:  green;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .stock_name_container {
+        display: flex;
+        justify-content: space-between;
+        flex: 80%;
+        .stock_name{
+            min-width: 6rem;
+        }
+
+        .stock_symobl h4,
+        .stock_name h4 {
+            font-size: 12px;
+            //  background-color: antiquewhite;
+            margin: 0px;
+            font-family: 'Roboto', sans-serif;
+            // margin: 0px;
+            font-weight: 400;
+        }
+    }
+
+    .stock_ltp_container {
+        // float: right;
+        flex: 20%;
+
+        h4 {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            margin: 0px;
+            font-weight: 400;
+
+        }
+    }
+
+}
+
+/*
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:wght@100;200;300;400;500&family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Silkscreen:wght@400;700&display=swap');
+font-family: 'Indie Flower', cursive;
+font-family: 'Inter', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Quicksand', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Silkscreen', cursive;
+*/

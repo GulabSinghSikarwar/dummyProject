@@ -11,7 +11,11 @@ import { HeaderComponent } from 'src/Components/header/header.component';
 import { FinnhubServiceService } from 'src/Services/finnhub-service.service';
 import { DepthContainerComponent } from 'src/Components/market-depth/depth-container/depth-container.component';
 import { ScalperContainerComponent } from 'src/Components/market-depth/scalper-container/scalper-container.component';
-import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.component';
+import { MarketWatchService } from 'src/Services/market-watch.service';
+import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.component'
+import { StockSymbolCardComponent } from 'src/Components/market-watch/stock-symbol-card/stock-symbol-card.component';
+import { MarketWatchUserInputComponent } from 'src/Components/market-watch/market-watch-user-input/market-watch-user-input.component';
+import { MarketWatchOutputComponent } from 'src/Components/market-watch/market-watch-output/market-watch-output.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,19 +23,23 @@ import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.c
     MarketDepthComponent,
     DepthContainerComponent,
     ScalperContainerComponent,
-    MarketWatchComponent
+    MarketWatchComponent,
+    StockSymbolCardComponent,
+    MarketWatchUserInputComponent,
+    MarketWatchOutputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-
+    HttpClientModule
 
 
 
   ],
   providers: [
-    FinnhubServiceService
+    FinnhubServiceService,
+    MarketWatchService
   ],
   bootstrap: [AppComponent]
 })

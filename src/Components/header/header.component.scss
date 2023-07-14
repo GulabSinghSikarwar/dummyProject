@@ -8,39 +8,16 @@
 .kiteIconContainer img {
     width: 40px;
 }
+.linksContainer{
+    min-width: 8rem ;
+    min-height: 1rem;
 
-ul.header {
-    list-style: none;
-    // background-color: #e4dcdc;
-    overflow: hidden;
-    margin: 0px;
-    padding: 0px;
+   .search-container{
+    display: flex;
+    justify-content: space-between;
+    min-width: 8rem;
+    background-color: aliceblue;
 
+   }
 }
-
-ul.header li {
-    float: right;
-}
-
-ul.header li a {
-    display: block;
-    text-align: center;
-    padding: .75vw 2vw;
-    text-decoration: none;
-    color: #444;
-    font-size: .85rem;
-    font-family: 'Roboto', sans-serif;
-
-
-}
-
-.activeLink {
-    color: #ff5722;
-
-}
-
-ul.header li a:hover,
-ul.header li a.active {
-    color: #ff5722;
-
-}
+ 

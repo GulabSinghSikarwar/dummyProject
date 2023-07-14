@@ -1,12 +1,19 @@
-<p>market-watch works!</p>
+ 
 
 <div class="market-watch-container">
     <div class="left-container">
-        <div class="symbol-search-container">
+        <!-- 
+
+            <div class="symbol-search-container">
             <form action="">
                 <div class="form-group">
-                    <input type="text">
-                    <button type="submit">Get Available Symbols</button>
+                    <div class="inputContainer">
+                         <input type="text"> -->
+        <!-- </div>
+                    <div class="buttonContainer"> -->
+
+        <!-- <button type="submit">Get Available Symbols</button> -->
+        <!-- </div>
 
 
                 </div>
@@ -14,9 +21,21 @@
 
             </form>
 
-        </div>
+        </div> -->
+
         <div class="symbol-output-container">
             <div class="output-symbol-card">
+                <app-stock-symbol-card 
+                *ngFor="let stock of marketData; let  i = index"  
+                
+                [dataIndex] ="i"
+                [name] ="stock.name"
+                [symbol] ="stock.ticker"
+                [price] ="stock.price"
+                >
+
+                </app-stock-symbol-card>
+
 
             </div>
         </div>
@@ -24,7 +43,7 @@
     </div>
     <div class="right-container">
 
-        Right data
+       <app-market-watch-user-input></app-market-watch-user-input>
 
     </div>
 

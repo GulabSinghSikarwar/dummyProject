@@ -5,12 +5,12 @@ import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.c
 
 const routes: Routes = [
   {
-    path:"market-depth",component:MarketDepthComponent,
-    
-  } ,
-  {
-    path:"market-watch",
-    component:MarketWatchComponent
+    path: "market-depth", component: MarketDepthComponent,
+
+
+  }, {
+    path: "market-watch", component: MarketWatchComponent,
+
   }
 ];
 

@@ -5,25 +5,20 @@
     .left-container {
 
         flex: 40%;
-        background-color: aliceblue;
+        // background-color: aliceblue;
 
-        .form-group{
+        .output-symbol-card{
             display: flex;
-            // justify-content: space-evenly;
-
-           input{
-            flex: 20%;
-           } 
-           button{
-            flex-direction: 80% ;
-           }
+            flex-direction: column;
+            // justify-content: space-around;
+            // min-height: 40rem;
         }
 
     }
 
 
     .right-container {
-        flex: 60%;
+        flex: 70%;
     }
 
 }
