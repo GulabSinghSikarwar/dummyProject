@@ -4,26 +4,31 @@
 
     .left-container {
 
-        flex: 40%;
-        background-color: aliceblue;
+        flex: 30%;
+        // background-color: aliceblue;
 
-        .form-group{
+        .form-group {
             display: flex;
             // justify-content: space-evenly;
 
-           input{
-            flex: 20%;
-           } 
-           button{
-            flex-direction: 80% ;
-           }
+            .inputContainer {
+                flex: 50%;
+                background-color: aqua;
+                height: 2rem;
+            }
+
+            .buttonContainer {
+                height: 2rem;
+                background-color: antiquewhite;
+                 flex: 50%;
+            }
         }
 
     }
 
 
     .right-container {
-        flex: 60%;
+        flex: 70%;
     }
 
 }
