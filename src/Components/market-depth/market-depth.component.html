@@ -1,30 +1,44 @@
-<p>market-depth works!</p>
-
 <div class="mainOuterContainer">
 
-    <div class="searchContainer">
-        <input type="text">
-    </div>
+
 
     <div class="stockDetailContainer">
 
         <div class="stockHeader">
             <div class="stockLTP-container">
-                <div class="stockSymbolContainer"></div>
-                <div class="stockLTP-container"></div>
+                <div class="stockSymbolContainer">
+                    <h4> {{symbol}} </h4>
+                </div>
+                <div class="stockLTP-container">
+                    <h4>LTP - {{price}} </h4>
+
+                </div>
             </div>
 
             <div class="stockDepthActionContainer">
-                <div class="depthAction"></div>
-                <div class="scalperAction"></div>
+                <div class="depthAction" >
+                    <button 
+                    (click)="showMarketDepth()" 
+                    [ngClass]="{'activeButton':showLimitedDepth}"
+                    
+                    > Maket depth </button>
+                </div>
+                <div class="scalperAction">
+                    <button (click)="showDepthScalper()" 
+                    
+                    [ngClass]="{'activeButton':!showLimitedDepth}"
+                    
+                    
+                    > Depth Scalper</button>
+                </div>
 
             </div>
         </div>
 
         <div class="stockDepthDetailContainer">
-            <app-depth-container></app-depth-container>
+            <app-depth-container *ngIf="showLimitedDepth" [buyers]="buyers" [sellers]="sellers"></app-depth-container>
+            <app-scalper-container [price]="price" *ngIf="!showLimitedDepth" [buyers]="buyers" [sellers]="sellers" ></app-scalper-container>
 
-            
         </div>
     </div>
 </div>

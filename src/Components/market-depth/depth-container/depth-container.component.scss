@@ -3,13 +3,22 @@
 
 table{
     font-family: 'Quicksand', sans-serif;
-    border: 1px solid black;
+    border: 1px solidhwb(210 87% 10%);
     border-collapse: collapse;
+    width: 100%;
+    text-align: center;
 }
 td ,th {
-    border : black solid 1px;
-    padding: 1rem  2rem;
+    border-top : #999ea2 solid 1px;
+    border-bottom : #dee2e6 solid 1px;
+    padding: 0.5rem  1rem;
+    border-right:0px ;
+    font-weight: 600;
+    font-size: 12px;
+    // background-color: ;
 
+}th{
+    font-weight: 500;
 }
 // font-family: 'Pangolin', cursive;
 // font-family: 'Quicksand', sans-serif;

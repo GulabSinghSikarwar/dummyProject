@@ -1,1 +1,17 @@
-<p>scalper-container works!</p>
+<div class="table-container">
+    <table>
+        <tr>
+            <th>My</th>
+            <th>Bid</th>
+            <th>Price</th>
+            <th>Ask</th>
+        </tr>
+        <tr *ngFor="let price of scalperPrices;let i=index">
+            <td></td>
+            <td></td>
+            <td>{{price}} </td>
+            <td></td>
+
+        </tr>
+    </table>
+</div>

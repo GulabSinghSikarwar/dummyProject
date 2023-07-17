@@ -1,85 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+interface Order {
+  price: number;
+  volume: number;
+}
 
 @Component({
   selector: 'app-market-depth',
   templateUrl: './market-depth.component.html',
   styleUrls: ['./market-depth.component.scss']
 })
-export class MarketDepthComponent {
 
+export class MarketDepthComponent implements OnInit {
+
+  @Input() price !: number;
+  @Input() symbol !: string;
   stockSymbol!: string;
+  buyers!: Order[];
+  sellers!: Order[];
+  showLimitedDepth: boolean = true;
 
-  buy_depthData!: {
-    marketVol: number,
-     
-    bid:number
-  }[]
-
-  sell_depth!:{
-    marketVol: number,
-   
-    ask:number
-  }[]
+  
 
 
 
-  constructor (){
-    this.buy_depthData=[
-      {
-        marketVol:139,
-         
-        bid:1449.85,
-      },
-      {
-        marketVol:217,
-         
-        bid:1449.80,
-      },
-      {
-        marketVol:214,
-         
-        bid:1449.75,
-      },
-      {
-        marketVol:184,
-         
-        bid:1449.70,
-      },
-      {
-        marketVol:260,
-         
-        bid:1449.65,
-      },
-       
-    ]
-    this.sell_depth=[
-      {
-        marketVol:29,
-         
-        ask:1449.90,
-      },
-      {
-        marketVol:139,
-         
-        ask:1449.95,
-      },
-      {
-        marketVol:144,
-         
-        ask:1450.00,
-      },
-      {
-        marketVol:207,
-         
-        ask:1450.05,
-      },
-      {
-        marketVol:253,
-         
-        ask:1450.10,
-      },
-    ]
+
+  constructor() {
+
   }
+
+  ngOnInit(): void {
+    this.generateBuyersAndSellers(this.price, 5.50, 5, 1000);
+
+
+  }
+  generateBuyersAndSellers(lastTradePrice: number, priceRange: number, numBuyersSellers: number, maxQuantity: number): void {
+    this.buyers = [];
+    this.sellers = [];
+
+    for (let i = 0; i < numBuyersSellers; i++) {
+      const buyerPrice = this.roundToTwoDecimalPlaces(this.roundToNearestIncrement((Math.random() * priceRange + (lastTradePrice - priceRange)), 0.05));
+      const buyerVolume = Math.floor(Math.random() * (maxQuantity + 1));
+      const buyer: Order = { price: buyerPrice, volume: buyerVolume };
+      this.buyers.push(buyer);
+
+      const sellerPrice = this.roundToTwoDecimalPlaces(this.roundToNearestIncrement((Math.random() * priceRange + lastTradePrice), 0.05));
+      const sellerVolume = Math.floor(Math.random() * (maxQuantity + 1));
+      const seller: Order = { price: sellerPrice, volume: sellerVolume };
+      this.sellers.push(seller);
+    }
+    this.buyers.sort((a, b) => b.price - a.price)
+    this.sellers.sort((a, b) => a.price - b.price)
+
+
+  }
+  roundToNearestIncrement(value: number, increment: number): number {
+    return Math.round(value / increment) * increment;
+  }
+  roundToTwoDecimalPlaces(value: number): number {
+    return Math.round(value * 100) / 100;
+  }
+  showMarketDepth(){
+    this.showLimitedDepth= true;
+
+  }
+  showDepthScalper(){
+    this.showLimitedDepth=false;
+
+  }
+  
+   
 }
 
 

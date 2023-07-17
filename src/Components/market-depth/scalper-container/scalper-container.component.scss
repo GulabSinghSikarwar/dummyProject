@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&family=Quicksand:wght@300;400;500;600;700&family=Roboto+Mono:wght@100;200;300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
+
+.table-container{
+    max-height: 12rem;
+    overflow-y: scroll;
+    // background-color: aquamarine;
+}
+table{
+    font-family: 'Quicksand', sans-serif;
+    border: 1px solidhwb(210 87% 10%);
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    
+
+}
+td ,th {
+    border-top : #999ea2 solid 1px;
+    border-bottom : #dee2e6 solid 1px;
+    padding: 0.5rem  1rem;
+    border-right:0px ;
+    font-weight: 600;
+    font-size: 12px;
+
+}
+th{
+    font-weight: 500;
+}
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #d1cfcf;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #828080;
+}
+
+
+// font-family: 'Pangolin', cursive;
+// font-family: 'Quicksand', sans-serif;
+// font-family: 'Roboto Mono', monospace;
+// font-family: 'Rubik', sans-serif;

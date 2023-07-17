@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+interface Order {
+  price: number;
+  volume: number;
+}
 @Component({
   selector: 'app-depth-container',
   templateUrl: './depth-container.component.html',
   styleUrls: ['./depth-container.component.scss']
 })
-export class DepthContainerComponent {
+export class DepthContainerComponent implements OnInit {
+
+  @Input() sellers!:Order[];
+  @Input() buyers!:Order[];
   staock_name: string = "ICICIBANK (ESMNSE)"
   buy_depthData!: {
     marketVol: number,
@@ -75,6 +81,13 @@ export class DepthContainerComponent {
         ask: 1450.10,
       },
     ]
+    
+    
 
   }
+  ngOnInit(): void {
+      console.log(this.buyers);
+      
+  }
 }
+

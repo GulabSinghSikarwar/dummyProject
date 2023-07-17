@@ -1,5 +1,3 @@
- 
-
 <div class="market-watch-container">
     <div class="left-container">
         <!-- 
@@ -25,14 +23,8 @@
 
         <div class="symbol-output-container">
             <div class="output-symbol-card">
-                <app-stock-symbol-card 
-                *ngFor="let stock of marketData; let  i = index"  
-                
-                [dataIndex] ="i"
-                [name] ="stock.name"
-                [symbol] ="stock.ticker"
-                [price] ="stock.price"
-                >
+                <app-stock-symbol-card *ngFor="let stock of marketData; let  i = index" [dataIndex]="i"
+                    [name]="stock.name" [symbol]="stock.ticker" [price]="stock.price">
 
                 </app-stock-symbol-card>
 
@@ -42,8 +34,9 @@
 
     </div>
     <div class="right-container">
+         <!-- <app-market-depth></app-market-depth> -->
+         <app-market-depth *ngFor="let stock of available_stocks;let i=index" [price]="stock.price" [symbol]="stock.symbol" ></app-market-depth>
 
-       <app-market-watch-user-input></app-market-watch-user-input>
 
     </div>
 
