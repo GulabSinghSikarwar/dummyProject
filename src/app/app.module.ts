@@ -24,7 +24,10 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 import {NgFor, AsyncPipe} from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {DragDropModule} from '@angular/cdk/drag-drop'
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,13 +45,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
-    FormsModule, 
-    MatAutocompleteModule, 
-    ReactiveFormsModule, 
-    NgFor 
-    AsyncPipe
+    HttpClientModule,
+    BrowserAnimationsModule,
+    DragDropModule,
 
+  
 
 
 
