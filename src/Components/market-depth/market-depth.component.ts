@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MarketWatchService } from 'src/Services/market-watch.service';
 
 interface Order {
   price: number;
@@ -14,6 +15,7 @@ interface Order {
 export class MarketDepthComponent implements OnInit {
 
   @Input() price !: number;
+  @Input() index !: number;
   @Input() symbol !: string;
   stockSymbol!: string;
   buyers!: Order[];
@@ -25,7 +27,7 @@ export class MarketDepthComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private marketWatchService :MarketWatchService) {
 
   }
 
@@ -66,6 +68,11 @@ export class MarketDepthComponent implements OnInit {
   }
   showDepthScalper(){
     this.showLimitedDepth=false;
+
+  }
+  removeStockFromList (){
+    this.marketWatchService.removeItem(this.index);
+
 
   }
   

@@ -39,7 +39,13 @@
         <div class="serch-inner-container">
             <div class="search-pair">
                 <div class="search-input-container">
-                    <input formControlName="symbol" type="text">
+                    <input formControlName="symbol" type="text"  [matAutocomplete]="auto"
+                    > <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
+                          {{symbol}}
+                        </mat-option>
+                      </mat-autocomplete>
+                
                 </div>
                 <div class="add-action-btn-container">
                     <button (click)="get_LTP_from_Symbol()">add </button>

@@ -17,7 +17,17 @@ import { StockSymbolCardComponent } from 'src/Components/market-watch/stock-symb
 import { MarketWatchUserInputComponent } from 'src/Components/market-watch/market-watch-user-input/market-watch-user-input.component';
 import { MarketWatchOutputComponent } from 'src/Components/market-watch/market-watch-output/market-watch-output.component';
 import { StockDepthComponent } from 'src/Components/market-watch/stock-depth/stock-depth.component';
-import {DragDropModule} from '@angular/cdk/drag-drop'
+
+
+import { Component, OnInit } from '@angular/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { DragDropModule } from '@angular/cdk/drag-drop'
+import { UpdateMarketDataService } from 'src/Services/update-market-data.service';
 
 @NgModule({
   declarations: [
@@ -30,21 +40,29 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     StockSymbolCardComponent,
     MarketWatchUserInputComponent,
     MarketWatchOutputComponent,
-    StockDepthComponent
+    StockDepthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    DragDropModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+    NgFor,
     
+
+
+
 
 
 
   ],
   providers: [
     FinnhubServiceService,
-    MarketWatchService
+    MarketWatchService,UpdateMarketDataService
   ],
   bootstrap: [AppComponent]
 })

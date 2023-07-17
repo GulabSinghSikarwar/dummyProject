@@ -40,5 +40,10 @@
             <app-scalper-container [price]="price" *ngIf="!showLimitedDepth" [buyers]="buyers" [sellers]="sellers" ></app-scalper-container>
 
         </div>
+        <div class="removeItemContainer">
+            <button (click)="removeStockFromList()">
+                close
+            </button>
+        </div>
     </div>
 </div>

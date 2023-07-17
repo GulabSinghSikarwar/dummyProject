@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 
@@ -7,17 +7,18 @@ import { Observable, catchError } from 'rxjs';
 })
 export class MarketWatchService {
 
+
+  detailedList: any[] = [];
+
+  stockListChanged = new EventEmitter<{ price: number, symbol: string }[]>
+  detailedListChanged = new EventEmitter<any[]>
   stock_list: {
     symbol: string,
     price: number
-  }[] = [{
-    symbol: "MSFT",
-    price: 152
-  }, {
-    symbol: "GOOGL",
-    price: 265
-  },];
+  }[] = [];
   top100StockSymbols = [
+    "V",
+
     "AAPL",
     "MSFT",
     "AMZN",
@@ -81,7 +82,36 @@ export class MarketWatchService {
     // );
     return this.http.get('../assets/dataset.json')
   }
+  add_to_stock_list(symbol: string) {
+    this.get_LTP_from_symbol(symbol).subscribe((data) => {
+      // console.log("data arrived : ", data);
 
+      this.stock_list.push({
+        symbol: data.data[0].ticker,
+        price: data.data[0].price
+      });
+      // console.log(" updated  list 1 : ", this.stock_list);
+
+      this.detailedList.push({ ...data.data[0] })
+      // console.log(" updated  list 1 : ", this.detailedList);
+
+      this.stockListChanged.emit(this.stock_list);
+      this.detailedListChanged.emit(this.detailedList)
+
+
+
+    })
+
+  }
+  get_LTP_from_symbol(symbol: string): Observable<any> {
+
+    // let url = `https://api.stockdata.org/v1/data/quote?symbols=${symbol}&api_token=MRYyOChJicZDi8Wfj7twgYg98IwqY7zLOOerRHJy`
+
+
+    let url = `../assets/singleStock.json`
+    return this.http.get(url);
+
+  }
   getDataFromDataSet(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
@@ -90,68 +120,37 @@ export class MarketWatchService {
     }
     return this.http.get('/assets/datasets.json');
   }
-  get_LTP_from_symbol(symbol: string): Observable<any> {
+  removeItem(index: number) {
+    this.stock_list.splice(index, 1);
+    this.detailedList.splice(index, 1);
 
-    let url = `https://api.stockdata.org/v1/data/quote?symbols=${symbol}&api_token=MRYyOChJicZDi8Wfj7twgYg98IwqY7zLOOerRHJy`
-
-    return this.http.get(url);
 
   }
-  add_to_stock_list(symbol: string) {
-    this.get_LTP_from_symbol(symbol).subscribe((data) => {
+  updateStocks(data: any) {
+
+    this.stock_list = [];
+    this.detailedList = [];
+
+    for (let stock of data.data) {
       this.stock_list.push({
-        symbol,
-        price: data.data[0].price
-      });
+        symbol: stock.ticker,
+        price: stock.price
+      })
+      this.detailedList.push({ ...stock })
+    }
+    this.stockListChanged.emit(this.stock_list);
+    this.detailedListChanged.emit(this.detailedList)
 
-
-    })
 
   }
+  getData() {
+    return {
+      detailedList: this.detailedList,
+      stock_list: this.stock_list
 
-}
-/**
- * 
-interface Order {
-  price: number;
-  volume: number;
-}
-
-function generateBuyersAndSellers(lastTradePrice: number, priceRange: number, numBuyersSellers: number, maxQuantity: number): { buyers: Order[], sellers: Order[] } {
-  const buyers: Order[] = [];
-  const sellers: Order[] = [];
-
-  for (let i = 0; i < numBuyersSellers; i++) {
-    const buyerPrice = parseFloat((Math.random() * priceRange + (lastTradePrice - priceRange)).toFixed(2));
-    const buyerVolume = Math.floor(Math.random() * (maxQuantity + 1));
-    const buyer: Order = { price: buyerPrice, volume: buyerVolume };
-    buyers.push(buyer);
-
-    const sellerPrice = parseFloat((Math.random() * priceRange + lastTradePrice).toFixed(2));
-    const sellerVolume = Math.floor(Math.random() * (maxQuantity + 1));
-    const seller: Order = { price: sellerPrice, volume: sellerVolume };
-    sellers.push(seller);
+    }
   }
 
-  return { buyers, sellers };
+
+
 }
-
-// Example usage
-const lastTradePrice = 930.45;
-const priceRange = 5.50;
-const numBuyersSellers = 5;
-const maxQuantity = 1000;
-
-const { buyers, sellers } = generateBuyersAndSellers(lastTradePrice, priceRange, numBuyersSellers, maxQuantity);
-
-// Print the generated buyers
-console.log("Buyers:");
-for (const buyer of buyers) {
-  console.log(buyer);
-}
-console.log("Sellers:");
-for (const buyer of sellers) {
-  console.log(buyer);
-}
-
- */
