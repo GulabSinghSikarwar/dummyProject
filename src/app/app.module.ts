@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarketDepthComponent } from 'src/Components/market-depth/market-depth.component';
 import { HeaderComponent } from 'src/Components/header/header.component';
@@ -17,14 +17,7 @@ import { StockSymbolCardComponent } from 'src/Components/market-watch/stock-symb
 import { MarketWatchUserInputComponent } from 'src/Components/market-watch/market-watch-user-input/market-watch-user-input.component';
 import { MarketWatchOutputComponent } from 'src/Components/market-watch/market-watch-output/market-watch-output.component';
 import { StockDepthComponent } from 'src/Components/market-watch/stock-depth/stock-depth.component';
- 
-
-import {Component, OnInit} from '@angular/core';
-// import {} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
-import {NgFor, AsyncPipe} from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {DragDropModule} from '@angular/cdk/drag-drop'
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,13 +36,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
-    FormsModule, 
-    MatAutocompleteModule, 
-    ReactiveFormsModule, 
-    NgFor 
-    AsyncPipe
-
-
+    
 
 
 
