@@ -18,6 +18,7 @@ import { MarketWatchUserInputComponent } from 'src/Components/market-watch/marke
 import { MarketWatchOutputComponent } from 'src/Components/market-watch/market-watch-output/market-watch-output.component';
 import { StockDepthComponent } from 'src/Components/market-watch/stock-depth/stock-depth.component';
 import {DragDropModule} from '@angular/cdk/drag-drop'
+
 @NgModule({
   declarations: [
     AppComponent,
