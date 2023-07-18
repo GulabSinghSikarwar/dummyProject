@@ -31,7 +31,9 @@ export class UpdateMarketDataService {
   }
 
   startUpdateData(): void {
+
     setInterval(() => {
+      console.log("start update is called : ");
       if (this.marketWatchService.stock_list.length > 0) {
         const allSymbols: string = this.generateAllSymbolString();
         this.updateData(allSymbols);
@@ -60,3 +62,4 @@ export class UpdateMarketDataService {
     return allSymbol;
   }
 }
+

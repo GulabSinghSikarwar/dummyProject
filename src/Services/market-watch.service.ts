@@ -1,16 +1,21 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, Subject, catchError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketWatchService {
 
+
   detailedList: any[] = [];
-  stock_list: { symbol: string, price: number }[] = [];
-  stockListChanged = new Subject<{ symbol: string, price: number }[]>();
-  detailedListChanged = new Subject<any[]>();
+
+  stockListChanged = new EventEmitter<{ price: number, symbol: string }[]>
+  detailedListChanged = new EventEmitter<any[]>
+  stock_list: {
+    symbol: string,
+    price: number
+  }[] = [];
   top100StockSymbols = [
     "V",
 
@@ -90,8 +95,8 @@ export class MarketWatchService {
       this.detailedList.push({ ...data.data[0] })
       // console.log(" updated  list 1 : ", this.detailedList);
 
-      this.stockListChanged.next(this.stock_list);
-    this.detailedListChanged.next(this.detailedList);
+      this.stockListChanged.emit(this.stock_list);
+      this.detailedListChanged.emit(this.detailedList)
 
 
 
@@ -122,6 +127,7 @@ export class MarketWatchService {
 
   }
   updateStocks(data: any) {
+
     this.stock_list = [];
     this.detailedList = [];
 
@@ -129,12 +135,13 @@ export class MarketWatchService {
       this.stock_list.push({
         symbol: stock.ticker,
         price: stock.price
-      });
-      this.detailedList.push({ ...stock });
+      })
+      this.detailedList.push({ ...stock })
     }
+    this.stockListChanged.emit(this.stock_list);
+    this.detailedListChanged.emit(this.detailedList)
 
-    this.stockListChanged.next(this.stock_list);
-    this.detailedListChanged.next(this.detailedList);
+
   }
   getData() {
     return {
