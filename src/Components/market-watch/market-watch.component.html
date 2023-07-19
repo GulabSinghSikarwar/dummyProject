@@ -23,9 +23,9 @@
 
         <div class="symbol-output-container">
             <div class="output-symbol-card">
-                <app-stock-symbol-card *ngFor="let stock of detailedList; let i = index"
-                [dataIndex]="i" [name]="stock.name" [symbol]="stock.ticker" [price]="stock.price">
-              </app-stock-symbol-card>
+                <app-stock-symbol-card *ngFor="let stock of detailedList; let i = index" [dataIndex]="i"
+                    [name]="stock.name" [symbol]="stock.ticker" [price]="stock.price">
+                </app-stock-symbol-card>
 
 
             </div>
@@ -34,8 +34,7 @@
     </div>
     <div class="right-container">
         <!-- <app-market-depth></app-market-depth> -->
-        <app-market-depth *ngFor="let stock of stockList;let i=index" [price]="stock.price" [symbol]="stock.symbol"
-            [index]="i"></app-market-depth>
+        <app-market-depth *ngIf="market_watch_Service.activeElementIndex!=-1"></app-market-depth>
 
 
     </div>

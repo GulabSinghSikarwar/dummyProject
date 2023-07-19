@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MarketWatchService } from 'src/Services/market-watch.service';
+ 
 
 @Component({
   selector: 'app-market-watch',
@@ -12,13 +13,19 @@ export class MarketWatchComponent implements OnInit, OnDestroy {
   stockList: { symbol: string, price: number }[] = [];
   stockListSubscription!: Subscription;
   detailedListSubscription!: Subscription;
+  temp = true;
 
-  constructor(private market_watch_Service: MarketWatchService) { }
+  constructor(public market_watch_Service: MarketWatchService) {
+     
+  }
 
   ngOnInit(): void {
     this.stockListSubscription = this.market_watch_Service.stockListChanged.subscribe(
       (stockList: { symbol: string, price: number }[]) => {
+        // if(this.temp){
         this.stockList = stockList;
+        // }
+        this.temp = false;
       }
     );
 
@@ -28,13 +35,13 @@ export class MarketWatchComponent implements OnInit, OnDestroy {
       }
     );
 
-    for (let stock of this.market_watch_Service.detailedList) {
-      this.detailedList.push({ ...stock });
-    }
+    // for (let stock of this.market_watch_Service.detailedList) {
+    //   this.detailedList.push({ ...stock });
+    // }
 
-    for (let stock of this.market_watch_Service.stock_list) {
-      this.stockList.push({ ...stock });
-    }
+    // for (let stock of this.market_watch_Service.stock_list) {
+    //   this.stockList.push({ ...stock });
+    // }
   }
 
   ngOnDestroy(): void {

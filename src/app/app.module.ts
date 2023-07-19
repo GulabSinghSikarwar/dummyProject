@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarketDepthComponent } from 'src/Components/market-depth/market-depth.component';
 import { HeaderComponent } from 'src/Components/header/header.component';
-import { FinnhubServiceService } from 'src/Services/finnhub-service.service';
+ 
 import { DepthContainerComponent } from 'src/Components/market-depth/depth-container/depth-container.component';
 import { ScalperContainerComponent } from 'src/Components/market-depth/scalper-container/scalper-container.component';
 import { MarketWatchService } from 'src/Services/market-watch.service';
@@ -26,8 +26,7 @@ import { startWith, map } from 'rxjs/operators';
 import { NgFor, AsyncPipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DragDropModule } from '@angular/cdk/drag-drop'
-import { UpdateMarketDataService } from 'src/Services/update-market-data.service';
+import { DragDropModule } from '@angular/cdk/drag-drop' 
 
 @NgModule({
   declarations: [
@@ -61,8 +60,8 @@ import { UpdateMarketDataService } from 'src/Services/update-market-data.service
 
   ],
   providers: [
-    FinnhubServiceService,
-    MarketWatchService,UpdateMarketDataService
+    
+    MarketWatchService,   
   ],
   bootstrap: [AppComponent]
 })

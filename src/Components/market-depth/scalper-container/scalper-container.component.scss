@@ -39,9 +39,20 @@ th{
   background: #888;
   border-radius: 4px;
 }
+.ltp{
+  font-weight:800 ;
+  color: black;
+  background-color: #e3e0e0;
+}
 
 .table-container::-webkit-scrollbar-thumb:hover {
   background: #828080;
+}
+.redColor{
+  background-color: rgb(220, 191, 191);
+}
+.blueColor{
+  background-color: rgb(172, 172, 227);
 }
 
 

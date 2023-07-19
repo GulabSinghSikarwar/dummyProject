@@ -12,10 +12,7 @@ export class MarketWatchService {
 
   stockListChanged = new EventEmitter<{ price: number, symbol: string }[]>
   detailedListChanged = new EventEmitter<any[]>
-  stock_list: {
-    symbol: string,
-    price: number
-  }[] = [];
+  stock_list: { symbol: string, price: number }[] = [];
   top100StockSymbols = [
     "V",
 
@@ -72,6 +69,10 @@ export class MarketWatchService {
     "DAL",
     "DAL",
   ];
+  activeElementIndex: number = -1;
+  activeElementChangeEvent = new EventEmitter<number>();
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -105,10 +106,10 @@ export class MarketWatchService {
   }
   get_LTP_from_symbol(symbol: string): Observable<any> {
 
-    // let url = `https://api.stockdata.org/v1/data/quote?symbols=${symbol}&api_token=MRYyOChJicZDi8Wfj7twgYg98IwqY7zLOOerRHJy`
+    let url = `https://api.stockdata.org/v1/data/quote?symbols=${symbol}&api_token=MRYyOChJicZDi8Wfj7twgYg98IwqY7zLOOerRHJy`
 
 
-    let url = `../assets/singleStock.json`
+    // let url = `../assets/singleStock.json`
     return this.http.get(url);
 
   }
@@ -121,8 +122,16 @@ export class MarketWatchService {
     return this.http.get('/assets/datasets.json');
   }
   removeItem(index: number) {
+    console.log("remove service is called ");
+
     this.stock_list.splice(index, 1);
     this.detailedList.splice(index, 1);
+    this.activeElementIndex++;
+    if (this.activeElementIndex >= this.stock_list.length)
+      this.activeElementIndex = -1;
+
+
+    this.activeElementChangeEvent.emit(this.activeElementIndex)
 
 
   }
@@ -149,6 +158,13 @@ export class MarketWatchService {
       stock_list: this.stock_list
 
     }
+  }
+  updateActiveElementIndex(index: number) {
+
+    this.activeElementIndex = index;
+    this.activeElementChangeEvent.emit(index)
+
+
   }
 
 
