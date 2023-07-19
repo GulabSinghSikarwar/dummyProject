@@ -46,14 +46,17 @@ export class MarketDepthComponent implements OnInit {
 
 
     }
+
+    this.index = this.marketWatchService.activeElementIndex;
     this.marketWatchService.activeElementChangeEvent.subscribe((data: number) => {
       this.index = this.marketWatchService.activeElementIndex;
       if (this.index != -1) {
         this.price = this.marketWatchService.stock_list[this.index].price
         this.symbol = this.marketWatchService.stock_list[this.index].symbol
+        console.log(this.price);
+
       }
     })
-    this.index = this.marketWatchService.activeElementIndex;
 
 
 
@@ -105,9 +108,11 @@ export class MarketDepthComponent implements OnInit {
 
     setInterval(() => {
       console.log("start update is called : ");
+
       if (this.marketWatchService.stock_list.length > 0) {
 
         this.updateData();
+
         if (this.price)
           this.generateBuyersAndSellers(this.price, 5.50, 5, 1000);
       }
@@ -123,6 +128,8 @@ export class MarketDepthComponent implements OnInit {
         if (this.index != -1) {
           this.marketWatchService.stock_list[this.index].price = response.data[0].price;
           this.marketWatchService.detailedList[this.index].price = response.data[0].price;
+          this.marketWatchService.emitUpdateEvent()
+          
         }
 
         // this.marketWatchService.updateStocks(response);

@@ -163,8 +163,13 @@ export class MarketWatchService {
 
     this.activeElementIndex = index;
     this.activeElementChangeEvent.emit(index)
+    
 
 
+  }
+  emitUpdateEvent(){
+    this.activeElementChangeEvent.emit(this.activeElementIndex);
+    
   }
 
 
