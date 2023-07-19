@@ -8,10 +8,9 @@
         </tr>
         <tr *ngFor="let price of scalperPrices;let i=index">
             <td></td>
-            <td></td>
-            <td>{{price}} </td>
-            <td></td>
-
+            <td [ngClass]="{'redColor':i>=6}"  ><span *ngIf="i>4">{{scalperVolumes[i]}} </span></td>
+            <td [ngClass]="{'ltp': i === 5}">{{ price }}</td>
+            <td [ngClass]="{'blueColor':i<=4}" > <span *ngIf="i<=4">{{scalperVolumes[i]}} </span></td>
         </tr>
     </table>
 </div>

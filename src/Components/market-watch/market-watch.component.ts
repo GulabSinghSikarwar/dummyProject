@@ -1,69 +1,51 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MarketWatchService } from 'src/Services/market-watch.service';
-import { UpdateMarketDataService } from 'src/Services/update-market-data.service';
+ 
 
 @Component({
   selector: 'app-market-watch',
   templateUrl: './market-watch.component.html',
   styleUrls: ['./market-watch.component.scss']
 })
-export class MarketWatchComponent implements OnInit {
+export class MarketWatchComponent implements OnInit, OnDestroy {
   detailedList: any[] = [];
-  stockList: any[] = [];
+  stockList: { symbol: string, price: number }[] = [];
+  stockListSubscription!: Subscription;
+  detailedListSubscription!: Subscription;
+  temp = true;
 
-
-
-
-
-
-  constructor(private market_watch_Service: MarketWatchService, private updateMarketData: UpdateMarketDataService) {
-
-
-
-
-
-  }trackByIndex(index: number, item: any): number {
-    return index;
+  constructor(public market_watch_Service: MarketWatchService) {
+     
   }
-  
-  trackBySymbolIndex(index: number, item: any): string {
-    return item.symbol;
-  }
-  
+
   ngOnInit(): void {
-    let data = this.market_watch_Service.getData();
-    this.detailedList = data.detailedList;
-    this.stockList = data.stock_list;
+    this.stockListSubscription = this.market_watch_Service.stockListChanged.subscribe(
+      (stockList: { symbol: string, price: number }[]) => {
+        // if(this.temp){
+        this.stockList = stockList;
+        // }
+        this.temp = false;
+      }
+    );
 
+    this.detailedListSubscription = this.market_watch_Service.detailedListChanged.subscribe(
+      (detailedList: any[]) => {
+        this.detailedList = detailedList;
+      }
+    );
 
-    this.market_watch_Service.detailedListChanged.subscribe((updatedDetailedList) => {
-      this.detailedList = updatedDetailedList;
+    // for (let stock of this.market_watch_Service.detailedList) {
+    //   this.detailedList.push({ ...stock });
+    // }
 
-    })
-    this.market_watch_Service.stockListChanged.subscribe((updatedStockList) => {
-      this.stockList = updatedStockList;
-
-    })
-
-
-
-
-
-
-
+    // for (let stock of this.market_watch_Service.stock_list) {
+    //   this.stockList.push({ ...stock });
+    // }
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log("change is occured : ",changes);
 
-  //   let n =this.market_watch_Service.stock_list.length;
-  //   console.log(" n : ",n);
-
-
-  //   if (this.market_watch_Service.stock_list.length > 0) {
-  //     this.updateMarketData.startUpdateData()
-
-  //   }
-  // }
-
-
+  ngOnDestroy(): void {
+    this.stockListSubscription.unsubscribe();
+    this.detailedListSubscription.unsubscribe();
+  }
 }

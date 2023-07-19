@@ -16,28 +16,23 @@
             </div>
 
             <div class="stockDepthActionContainer">
-                <div class="depthAction" >
-                    <button 
-                    (click)="showMarketDepth()" 
-                    [ngClass]="{'activeButton':showLimitedDepth}"
-                    
-                    > Maket depth </button>
+                <div class="depthAction">
+                    <button (click)="showMarketDepth()" [ngClass]="{'activeButton':showLimitedDepth}"> Maket depth
+                    </button>
                 </div>
                 <div class="scalperAction">
-                    <button (click)="showDepthScalper()" 
-                    
-                    [ngClass]="{'activeButton':!showLimitedDepth}"
-                    
-                    
-                    > Depth Scalper</button>
+                    <button (click)="showDepthScalper()" [ngClass]="{'activeButton':!showLimitedDepth}"> Depth
+                        Scalper</button>
                 </div>
 
             </div>
         </div>
 
         <div class="stockDepthDetailContainer">
-            <app-depth-container *ngIf="showLimitedDepth" [buyers]="buyers" [sellers]="sellers"></app-depth-container>
-            <app-scalper-container [price]="price" *ngIf="!showLimitedDepth" [buyers]="buyers" [sellers]="sellers" ></app-scalper-container>
+            <app-depth-container *ngIf="showLimitedDepth&& index!=-1" [buyers]="buyers"
+                [sellers]="sellers"></app-depth-container>
+            <app-scalper-container *ngIf="!showLimitedDepth && index!=-1" [price]="price" [buyers]="buyers"
+                [sellers]="sellers"></app-scalper-container>
 
         </div>
         <div class="removeItemContainer">

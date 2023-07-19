@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MarketWatchService } from 'src/Services/market-watch.service';
 
 @Component({
   selector: 'app-stock-symbol-card',
@@ -10,6 +11,16 @@ export class StockSymbolCardComponent {
   @Input() name!: string;
   @Input() price!: number;
   @Input() symbol!: string;
+
+  constructor(private marketWatchService: MarketWatchService) {
+
+  }
+  updateActiveElementIndex() {
+    console.log("update active index called ");
+    console.log(" index : ", this.dataIndex);
+    
+    this.marketWatchService.updateActiveElementIndex(this.dataIndex)
+  }
 
 
 }
