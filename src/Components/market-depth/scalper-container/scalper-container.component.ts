@@ -60,8 +60,12 @@ export class ScalperContainerComponent implements OnInit {
     const maxNumber = 1000; // Maximum number in the range
     const numberOfElements = 11;
     for (let i = 0; i < numberOfElements; i++) {
-      const randomNumber = this.getRandomNumber(minNumber, maxNumber);
+      const randomNumber = this.getRandomNumber(minNumber, maxNumber) ;
       this.scalperVolumes.push(randomNumber);
     }
+  }
+  priceTwodecimalPlace ( num : number )
+  {
+    
   }
 }

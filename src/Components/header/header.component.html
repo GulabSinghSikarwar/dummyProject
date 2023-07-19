@@ -1,46 +1,11 @@
 <div class="headerContainer">
-
-    <!-- <div class="kiteIconContainer">
-        <img src="../../../assets/kiteLogo.png" alt="" srcset="">
-    </div>
-
-    <div class="linksContainer">
-        
-         <ul class="header">
-            <li>
-                <a [routerLink]="['/multiple-symbol']" [routerLinkActive]="'active'"
-                    [routerLinkActiveOptions]="{exact:true}">
-                     Multiple Symbols
-                </a>
-            </li>
-           
-           
-            <li>
-                <a [routerLink]="['/models-and-views']" [routerLinkActive]="'active'"
-                    [routerLinkActiveOptions]="{exact:true}">
-                   Models and Views
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/market-depth']" [routerLinkActive]="'active'"
-                    [routerLinkActiveOptions]="{exact:true}">Market Depth</a>
-            </li>
-            <li>
-                <a [routerLink]="['/market-watch']" [routerLinkActive]="'active'"
-                    [routerLinkActiveOptions]="{exact:true}">Market watch</a>
-            </li>
-            
-
-        </ul>
-       
-      
-    </div> -->
-    <div class="search-container"   [formGroup]="enteredSymbol" >
+ 
+    <form class="search-container"   [formGroup]="enteredSymbol" >
         <div class="serch-inner-container">
             <div class="search-pair">
                 <div class="search-input-container">
-                    <input formControlName="symbol" type="text"  [matAutocomplete]="auto"
-                    > <mat-autocomplete #auto="matAutocomplete">
+                    <input formControlName="symbol" type="text"  [matAutocomplete]="auto">
+                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
                           {{symbol}}
                         </mat-option>
@@ -52,7 +17,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
 
 

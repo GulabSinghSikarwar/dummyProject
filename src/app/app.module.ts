@@ -16,6 +16,7 @@ import { MarketWatchComponent } from 'src/Components/market-watch/market-watch.c
 import { StockSymbolCardComponent } from 'src/Components/market-watch/stock-symbol-card/stock-symbol-card.component';
 import { MarketWatchUserInputComponent } from 'src/Components/market-watch/market-watch-user-input/market-watch-user-input.component';
 import { MarketWatchOutputComponent } from 'src/Components/market-watch/market-watch-output/market-watch-output.component';
+
 import { StockDepthComponent } from 'src/Components/market-watch/stock-depth/stock-depth.component';
 
 

@@ -76,13 +76,7 @@ export class MarketWatchService {
 
   constructor(private http: HttpClient) { }
 
-  marketSymbolsData(): Observable<any> {
-    // return this.http.get('https://api.stockdata.org/v1/data/quote?symbols=AAPL%2CTSLA%2CMSFT&api_token=MRYyOChJicZDi8Wfj7twgYg98IwqY7zLOOerRHJy').pipe(
-    //   // catchError()
-
-    // );
-    return this.http.get('../assets/dataset.json')
-  }
+ 
   add_to_stock_list(symbol: string) {
     this.get_LTP_from_symbol(symbol).subscribe((data) => {
       // console.log("data arrived : ", data);
@@ -113,14 +107,7 @@ export class MarketWatchService {
     return this.http.get(url);
 
   }
-  getDataFromDataSet(error: HttpErrorResponse): Observable<any> {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.log(error);
-    }
-    return this.http.get('/assets/datasets.json');
-  }
+  
   removeItem(index: number) {
     console.log("remove service is called ");
 
