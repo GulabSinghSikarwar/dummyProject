@@ -1,11 +1,13 @@
 <div class="market-watch-container">
     <div class="left-container">
- 
+
 
         <div class="symbol-output-container">
             <div class="output-symbol-card">
-                <app-stock-symbol-card *ngFor="let stock of detailedList; let i = index" [dataIndex]="i"
-                    [name]="stock.name" [symbol]="stock.ticker" [price]="stock.price">
+                <app-stock-symbol-card  *ngFor="let stock of detailedList; let i = index" [dataIndex]="i"
+                    [name]="stock.Name" [symbol]="stock.Ticker" [price]="stock.Price" 
+                    [routerLink]="[stock.ID]"
+                    >
                 </app-stock-symbol-card>
 
 
@@ -15,7 +17,7 @@
     </div>
     <div class="right-container">
         <!-- <app-market-depth></app-market-depth> -->
-        <app-market-depth *ngIf="market_watch_Service.activeElementIndex!=-1"></app-market-depth>
+        <router-outlet></router-outlet>
 
 
     </div>

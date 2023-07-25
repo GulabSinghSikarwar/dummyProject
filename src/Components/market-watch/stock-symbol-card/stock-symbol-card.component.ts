@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input ,OnInit} from '@angular/core';
 import { MarketWatchService } from 'src/Services/market-watch.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { MarketWatchService } from 'src/Services/market-watch.service';
   templateUrl: './stock-symbol-card.component.html',
   styleUrls: ['./stock-symbol-card.component.scss']
 })
-export class StockSymbolCardComponent {
+export class StockSymbolCardComponent  implements OnInit {
   @Input() dataIndex!: number;
   @Input() name!: string;
   @Input() price!: number;
@@ -20,6 +20,10 @@ export class StockSymbolCardComponent {
     console.log(" index : ", this.dataIndex);
     
     this.marketWatchService.updateActiveElementIndex(this.dataIndex)
+  }
+  ngOnInit(): void {
+      console.log("name : ",this.name);
+      
   }
 
 

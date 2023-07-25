@@ -1,0 +1,34 @@
+<div class="auth-login-main-container">
+
+    <div class="login-container">
+        <form action="" [formGroup]="signupForm">
+            <div class="form-group">
+                <label for="">Name </label>
+                <input formControlName="name" type="text" name="" id="">
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input formControlName="email" type="email" name="" id="">
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input formControlName="password" type="password" name="" id="">
+            </div>
+            <div class="form-group">
+                <label for="">Confirm Password</label>
+                <input formControlName="confirmPassword" type="password" name="" id="">
+            </div>
+            <div class="form-group ">
+                <div class="form-button-container">
+                    <button (click)="submitSinup()"> Submit</button>
+
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="form-button-container">
+                    <app-error-warning *ngIf="error" [errorMessage]="error"> </app-error-warning>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

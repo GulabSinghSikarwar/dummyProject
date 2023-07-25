@@ -28,6 +28,12 @@ import { NgFor, AsyncPipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DragDropModule } from '@angular/cdk/drag-drop' 
+import { LoginComponent } from 'src/Components/Auth/login/login.component';
+import { SignupComponent } from 'src/Components/Auth/signup/signup.component';
+import { AuthService } from 'src/Services/AuthService/auth-service.service';
+import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
+import { AuthGaurdService } from 'src/Services/AuthService/auth-gaurd.service';
+import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-warning/error-warning.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +47,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     MarketWatchUserInputComponent,
     MarketWatchOutputComponent,
     StockDepthComponent,
+    LoginComponent,
+    SignupComponent,
+    ErrorWarningComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +72,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
   providers: [
     
     MarketWatchService,   
+    AuthService,
+    WatchlistService,
+    AuthGaurdService
   ],
   bootstrap: [AppComponent]
 })

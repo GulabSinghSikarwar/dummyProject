@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import {startWith, map} from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
+import { AuthService } from 'src/Services/AuthService/auth-service.service';
+import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
 import { MarketWatchService } from 'src/Services/market-watch.service';
 @Component({
   selector: 'app-header',
@@ -9,6 +12,7 @@ import { MarketWatchService } from 'src/Services/market-watch.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  token: string | undefined | null;
 
 
   enteredSymbol!: FormGroup;
@@ -66,30 +70,50 @@ export class HeaderComponent implements OnInit {
     "DAL",
     "DAL",
   ];
-  filteredSymbols !:Observable<string [] >;
-  
+  filteredSymbols !: Observable<string[]>;
 
-constructor(private marketWatchServeice:MarketWatchService){
 
-}
+  constructor(private watchlistService: WatchlistService, private route: ActivatedRoute, private marketWatchServeice: MarketWatchService, public authService: AuthService) {
+
+  }
 
 
   get_LTP_from_Symbol() {
- 
-    
-    this.marketWatchServeice.add_to_stock_list(this.enteredSymbol.value['symbol'])
 
-    
+    let watchlistId = this.watchlistService.watchlist?.ID;
+
+    // let watchlistId =this.route.snapshot.params['watchlistId']
+console.log("watchlistId in header : ",watchlistId);
+
+
+
+    this.marketWatchServeice.addStockToWatchList(this.enteredSymbol.value['symbol'], watchlistId!).subscribe((response) => {
+      this.marketWatchServeice.add_to_stock_list(response.stockAdded);
+      // this.
+
+    })
+    // this.marketWatchServeice.add_to_stock_list(this.enteredSymbol.value['symbol'])
+
+
 
 
 
 
   }
   ngOnInit(): void {
+
+    // initializing token 
+    this.token = this.authService.token;
+
+
+    // listening to change  to token 
+
+
+
     this.enteredSymbol = new FormGroup({
       'symbol': new FormControl(null)
     });
-  
+
     this.filteredSymbols = this.enteredSymbol.get('symbol')!.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '') as string[])
@@ -103,7 +127,13 @@ constructor(private marketWatchServeice:MarketWatchService){
   private _normalizeValue(value: string): string {
     return value.toUpperCase().replace(/\s/g, '');
   }
- 
+
+  LogoutUser() {
+
+    this.authService.logout();
+
+  }
+
 
 
 

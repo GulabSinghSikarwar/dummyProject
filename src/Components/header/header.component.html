@@ -1,25 +1,42 @@
 <div class="headerContainer">
- 
-    <form class="search-container"   [formGroup]="enteredSymbol" >
-        <div class="serch-inner-container">
-            <div class="search-pair">
-                <div class="search-input-container">
-                    <input formControlName="symbol" type="text"  [matAutocomplete]="auto">
-                     <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
-                          {{symbol}}
-                        </mat-option>
-                      </mat-autocomplete>
-                
-                </div>
-                <div class="add-action-btn-container">
-                    <button (click)="get_LTP_from_Symbol()">add </button>
+
+
+
+    <div class="search-header-container">
+        <form *ngIf="authService.token" class="search-container" [formGroup]="enteredSymbol">
+
+
+            <div class="serch-inner-container">
+                <div class="search-pair">
+                    <div class="search-input-container">
+                        <input formControlName="symbol" type="text" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
+                                {{symbol}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                    </div>
+                    <div class="add-action-btn-container">
+                        <button (click)="get_LTP_from_Symbol()">add </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+
+        </form>
+    </div>
+
+    <div class="linksContainer">
+        <ul class="header-menu">
+            <li  *ngIf="!authService.token" ><a [routerLink]="['/login']" >Login</a></li>
+            <li  *ngIf="!authService.token"><a [routerLink]="['/signup']" >Register</a></li>
+            <li (click)="LogoutUser()" *ngIf="authService.token"><a [routerLink]="['/login']" >Logout</a></li>
+            <!-- <li><a [routerLink]="['/login']" >Login</a></li> -->
+             
+        </ul>
+    </div>
 
 
 
-
+ 
 </div>

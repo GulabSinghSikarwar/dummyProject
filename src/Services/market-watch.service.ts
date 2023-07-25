@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
-
+import { AuthService } from './AuthService/auth-service.service';
+//  import {} from '@angular/'
 @Injectable({
   providedIn: 'root'
 })
@@ -74,28 +75,41 @@ export class MarketWatchService {
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService,) { }
 
- 
-  add_to_stock_list(symbol: string) {
-    this.get_LTP_from_symbol(symbol).subscribe((data) => {
-      // console.log("data arrived : ", data);
-
-      this.stock_list.push({
-        symbol: data.data[0].ticker,
-        price: data.data[0].price
-      });
-      // console.log(" updated  list 1 : ", this.stock_list);
-
-      this.detailedList.push({ ...data.data[0] })
-      // console.log(" updated  list 1 : ", this.detailedList);
-
-      this.stockListChanged.emit(this.stock_list);
-      this.detailedListChanged.emit(this.detailedList)
+  addStockToWatchList(symbol: string, watchlistId: string): Observable<any> {
 
 
 
-    })
+    let url = `http://localhost:8000/api/watchlist/${watchlistId}`
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.token}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
+
+    });
+
+    return this.http.post(url, { stockSymbol: symbol }, { headers });
+
+
+
+
+  }
+
+  add_to_stock_list(stockData: any) {
+    this.stock_list.push({
+      symbol: stockData.Ticker,
+      price: stockData.Price,
+
+    });
+
+
+    this.detailedList.push({ ...stockData })
+
+
+    this.stockListChanged.emit(this.stock_list);
+    this.detailedListChanged.emit(this.detailedList)
+
 
   }
   get_LTP_from_symbol(symbol: string): Observable<any> {
@@ -107,7 +121,7 @@ export class MarketWatchService {
     return this.http.get(url);
 
   }
-  
+
   removeItem(index: number) {
     console.log("remove service is called ");
 
@@ -127,15 +141,17 @@ export class MarketWatchService {
     this.stock_list = [];
     this.detailedList = [];
 
-    for (let stock of data.data) {
+    for (let stock of data) {
       this.stock_list.push({
-        symbol: stock.ticker,
-        price: stock.price
+        symbol: stock.Ticker,
+        price: stock.Price
       })
       this.detailedList.push({ ...stock })
     }
     this.stockListChanged.emit(this.stock_list);
     this.detailedListChanged.emit(this.detailedList)
+     
+    
 
 
   }
@@ -150,13 +166,13 @@ export class MarketWatchService {
 
     this.activeElementIndex = index;
     this.activeElementChangeEvent.emit(index)
-    
+
 
 
   }
-  emitUpdateEvent(){
+  emitUpdateEvent() {
     this.activeElementChangeEvent.emit(this.activeElementIndex);
-    
+
   }
 
 

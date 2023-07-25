@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
 import { MarketWatchService } from 'src/Services/market-watch.service';
 
 interface Order {
@@ -23,7 +25,7 @@ export class MarketDepthComponent implements OnInit {
   buyers!: Order[];
   sellers!: Order[];
   showLimitedDepth: boolean = true;
-  timeGap: number = 3;
+  timeGap: number = 1;
 
 
 
@@ -31,7 +33,9 @@ export class MarketDepthComponent implements OnInit {
 
 
 
-  constructor(private marketWatchService: MarketWatchService, private http: HttpClient) {
+  constructor(private watchlistService: WatchlistService, private marketWatchService: MarketWatchService, private http: HttpClient,
+    private route: ActivatedRoute
+  ) {
 
   }
 
@@ -45,12 +49,41 @@ export class MarketDepthComponent implements OnInit {
       this.startUpdateData()
 
 
+
+
+
+    }
+    else {
+
+      this.route.params.subscribe((params: Params) => {
+        const watchlistId = params['watchlistId'];
+        const stockId = params['stockId'];
+        console.log("watchlistId: ", watchlistId);
+        console.log("stockId: ", stockId);
+
+        // Fetch the stock details based on watchlistId and stockId
+        this.watchlistService.getStockById(watchlistId, stockId).subscribe((response) => {
+          this.price = response["stock"].Price;
+          this.symbol = response["stock"].Ticker;
+          console.log("response ", response);
+
+          console.log(" price : ", this.price);
+          console.log(" symbol : ", this.symbol);
+
+        })
+      })
+
+
     }
 
     this.index = this.marketWatchService.activeElementIndex;
     this.marketWatchService.activeElementChangeEvent.subscribe((data: number) => {
       this.index = this.marketWatchService.activeElementIndex;
       if (this.index != -1) {
+        let current_stock = { ...this.marketWatchService.stock_list[this.index] };
+        console.log("currentStock : ", current_stock);
+
+
         this.price = this.marketWatchService.stock_list[this.index].price
         this.symbol = this.marketWatchService.stock_list[this.index].symbol
         console.log(this.price);
@@ -111,7 +144,7 @@ export class MarketDepthComponent implements OnInit {
 
       if (this.marketWatchService.stock_list.length > 0) {
 
-        this.updateData();
+        // this.updateData();
 
         if (this.price)
           this.generateBuyersAndSellers(this.price, 5.50, 5, 1000);
@@ -124,16 +157,8 @@ export class MarketDepthComponent implements OnInit {
     if (this.symbol && this.index != -1) {
       console.log("index : ", this.index);
 
-      this.fetchData(this.symbol).subscribe((response) => {
-        if (this.index != -1) {
-          this.marketWatchService.stock_list[this.index].price = response.data[0].price;
-          this.marketWatchService.detailedList[this.index].price = response.data[0].price;
-          this.marketWatchService.emitUpdateEvent()
-          
-        }
 
-        // this.marketWatchService.updateStocks(response);
-      });
+      // this.marketWatchService.emitUpdateEvent()
     }
 
 
@@ -151,4 +176,8 @@ export class MarketDepthComponent implements OnInit {
 
 }
 
+
+function switchMap(arg0: (params: ParamMap) => Observable<any>): import("rxjs").OperatorFunction<import("@angular/router").ParamMap, unknown> {
+  throw new Error('Function not implemented.');
+}
 

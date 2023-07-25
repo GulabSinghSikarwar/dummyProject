@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:wght@100;200;300;400;500&family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Silkscreen:wght@400;700&display=swap');
+
+.err-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .error-warning-container {
+        text-align: center;
+        padding: 0.5rem 2rem;
+        background-color: rgb(235, 228, 228);
+        width: 100%;
+        border-radius: 8px;
+
+        p {
+            color: rgb(197, 40, 40);
+            font-weight: 400;
+            // font-family: 'Quicksand', sans-serif;
+            // font-family: 'Roboto', sans-serif;
+            // font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: capitalize;
+            font-size: 0.8rem;
+        }
+
+
+    }
+}
+
+/*
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:wght@100;200;300;400;500&family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Silkscreen:wght@400;700&display=swap');
+font-family: 'Indie Flower', cursive;
+font-family: 'Inter', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Quicksand', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Silkscreen', cursive;
+*/
