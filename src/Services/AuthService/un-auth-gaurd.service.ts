@@ -10,6 +10,7 @@ export class UnAuthGaurdService implements CanActivate, CanActivateChild {
 
 
   constructor(private authService: AuthService, private router: Router) { }
+ 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.canActivateChild(childRoute, state)
   }

@@ -10,11 +10,11 @@ import { AppComponent } from './app.component';
 import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-card/welcome-card.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: WelcomeCardComponent,
-    canActivate: [UnAuthGaurdService]
-  },
+  // {
+  //   path: '',
+  //   component: WelcomeCardComponent,
+  //   // canActivate: [UnAuthGaurdService]
+  // },
    {
     path: "watchlist/:watchlistId",
     canActivate: [AuthGaurdService],
