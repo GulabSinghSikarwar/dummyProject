@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs';
 import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
 import { MarketWatchService } from 'src/Services/market-watch.service';
 import { ActivatedRoute } from '@angular/router';
-
+ 
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-market-watch',
   templateUrl: './market-watch.component.html',
@@ -15,6 +16,7 @@ export class MarketWatchComponent implements OnInit, OnDestroy {
   stockListSubscription!: Subscription;
   detailedListSubscription!: Subscription;
   temp = true;
+  error?:string 
 
   constructor(public market_watch_Service: MarketWatchService, private watchlistService: WatchlistService, private route: ActivatedRoute) {
 
@@ -40,16 +42,26 @@ export class MarketWatchComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.watchlistService.getAllStocksInWatchList(this.route.snapshot.params['watchlistId']).subscribe((response) => {
+    this.watchlistService.getAllStocksInWatchList(this.route.snapshot.params['watchlistId']).subscribe(
+      (response) => {
 
       console.log("response : ", response);
 
       this.market_watch_Service.updateStocks(response.stocks)
     
 
-    })
+    },
+    (errorMessage)=>{
+      this.error=errorMessage.message
+      
+    } 
+    
+    )
 
 
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.market_watch_Service.detailedList, event.previousIndex, event.currentIndex);
   }
 
   ngOnDestroy(): void {

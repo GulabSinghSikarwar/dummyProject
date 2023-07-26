@@ -131,6 +131,7 @@ console.log("watchlistId in header : ",watchlistId);
   LogoutUser() {
 
     this.authService.logout();
+    
 
   }
 

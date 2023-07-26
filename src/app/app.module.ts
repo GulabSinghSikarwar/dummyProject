@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarketDepthComponent } from 'src/Components/market-depth/market-depth.component';
 import { HeaderComponent } from 'src/Components/header/header.component';
- 
+
 import { DepthContainerComponent } from 'src/Components/market-depth/depth-container/depth-container.component';
 import { ScalperContainerComponent } from 'src/Components/market-depth/scalper-container/scalper-container.component';
 import { MarketWatchService } from 'src/Services/market-watch.service';
@@ -27,13 +27,15 @@ import { startWith, map } from 'rxjs/operators';
 import { NgFor, AsyncPipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DragDropModule } from '@angular/cdk/drag-drop' 
+import { DragDropModule } from '@angular/cdk/drag-drop'
 import { LoginComponent } from 'src/Components/Auth/login/login.component';
 import { SignupComponent } from 'src/Components/Auth/signup/signup.component';
 import { AuthService } from 'src/Services/AuthService/auth-service.service';
 import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
 import { AuthGaurdService } from 'src/Services/AuthService/auth-gaurd.service';
 import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-warning/error-warning.component';
+import { UnAuthGaurdService } from 'src/Services/AuthService/un-auth-gaurd.service';
+import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-card/welcome-card.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-w
     StockDepthComponent,
     LoginComponent,
     SignupComponent,
-    ErrorWarningComponent
+    ErrorWarningComponent,
+    WelcomeCardComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-w
     MatAutocompleteModule,
     AsyncPipe,
     NgFor,
-    
+
 
 
 
@@ -70,11 +73,12 @@ import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-w
 
   ],
   providers: [
-    
-    MarketWatchService,   
+
+    MarketWatchService,
     AuthService,
     WatchlistService,
-    AuthGaurdService
+    AuthGaurdService,
+    UnAuthGaurdService
   ],
   bootstrap: [AppComponent]
 })

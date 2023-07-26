@@ -16,46 +16,64 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     let token: string = this.authService.getAuthToken() || ''
+
+
+    console.log(" token :  : ",token);
+    
     if (token !== '' || token)
       this.authService.setToken(token)
 
-      
+
     else {
-      console.log("here 1 ");
       
+
       this.router.navigate(['/login'])
     }
 
 
 
     let watchlistId = this.watchlistService.watchlist?.ID
-    console.log(" wid : ",watchlistId);
-    
+    console.log(" wid : ", watchlistId);
+
 
     if (!watchlistId) {
-      console.log("here ");
-      
-      this.watchlistService.initiateUser(token).subscribe((response: any) => {
-        console.log("response L ",response);
-        
-        // this.watchlistService.initiateUser(response.result[0])
-        // update user in marketWatch service 
-        this.watchlistService.setWatchlist(response.result[0])
-        // update watch list id in the wtachlist service 
-        this.marketWatchService.updateStocks(response.allStocks)
+      console.log("here  we dont have id ");
 
-        let watchlistId = this.watchlistService.watchlist?.ID;
-        let location = `watchlist/${watchlistId}`
-        console.log("location: ", location);
+      this.watchlistService.initiateUser(token).subscribe(
+        (response: any) => {
+          console.log("response L ", response);
 
-        this.router.navigate([location])
+          // this.watchlistService.initiateUser(response.result[0])
+          // update user in marketWatch service 
+          this.watchlistService.setWatchlist(response.result[0])
+          // update watch list id in the wtachlist service 
+          this.marketWatchService.updateStocks(response.allStocks)
+
+          let watchlistId = this.watchlistService.watchlist?.ID;
+          let location = `watchlist/${watchlistId}`
+          console.log("location: ", location);
+
+          this.router.navigate([location])
 
 
-      })
+        }
+        , (error) => {
+          // console.log("Error Response:", error , " object : ", );
+          if (error.error.message === 'Invalid token claim') {
+            console.log( "err message : ", error.message);
+
+            this.authService.logout()
+            this.router.navigate(['/login'])
+          }
+
+        }
+
+      )
 
     }
 
     let path = `/${watchlistId}`;
+    
 
     console.log("path: ", path);
 

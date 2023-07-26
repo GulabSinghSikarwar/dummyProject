@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -40,6 +41,8 @@ export class AuthService {
   }
   logout() {
     this.removeAuthToken()
+    this.token = null
+    this.router.navigate(['/login'])
   }
   setToken(tokenString: string) {
     this.token = tokenString;
@@ -68,7 +71,10 @@ export class AuthService {
 
   }
   isAuthenticated(): boolean {
-    return (!this.token) ? true : false;
+    // console.log("token : ",this.token);
+
+    return (this.token) ? true : false;
+    return true
 
   }
 
