@@ -8,19 +8,24 @@ import { AuthGaurdService } from 'src/Services/AuthService/auth-gaurd.service';
 import { UnAuthGaurdService } from 'src/Services/AuthService/un-auth-gaurd.service';
 import { AppComponent } from './app.component';
 import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-card/welcome-card.component';
+import { StockRouteGaurdService } from 'src/Services/StockGaurd/stock-route.service';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: WelcomeCardComponent,
-  //   // canActivate: [UnAuthGaurdService]
-  // },
-   {
+  {
+    path: '',
+    component: WelcomeCardComponent,
+    // canActivate: [UnAuthGaurdService]
+  },
+  {
     path: "watchlist/:watchlistId",
     canActivate: [AuthGaurdService],
     component: MarketWatchComponent,
     children: [
-      { path: ":stockId", component: MarketDepthComponent }
+      {
+        path: ":stockId",
+        component: MarketDepthComponent,
+        canActivate: [StockRouteGaurdService]
+      }
 
     ]
   },

@@ -36,9 +36,16 @@
 
         </div>
         <div class="removeItemContainer">
-            <button (click)="removeStockFromList()">
-                close
-            </button>
+            <div class="button-container">
+                <button (click)="closeCard()">
+                    Close
+                </button>
+            </div>
+            <div class="button-container">
+                <button (click)="removeStockFromList()">
+                    remove from Watchlist
+                </button>
+            </div>
         </div>
     </div>
 </div>

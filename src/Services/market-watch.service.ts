@@ -9,7 +9,26 @@ import { AuthService } from './AuthService/auth-service.service';
 export class MarketWatchService {
 
 
-  detailedList: any[] = [];
+  detailedList: {
+    Currency: string;
+    DayChange: number;
+    DayHigh: number;
+    DayLow: number;
+    DayOpen: number;
+    ExchangeLong: null | string;
+    ExchangeShort: null | string;
+    ID: string;
+    IsExtendedHoursPrice: boolean;
+    MICCode: string;
+    MarketCap: null | number;
+    Name: string;
+    PreviousClosePrice: number;
+    Price: number;
+    Ticker: string;
+    Volume: number;
+    Week52High: number;
+    Week52Low: number;
+  }[] = [];
 
   stockListChanged = new EventEmitter<{ price: number, symbol: string }[]>
   detailedListChanged = new EventEmitter<any[]>
@@ -132,8 +151,25 @@ export class MarketWatchService {
       this.activeElementIndex = -1;
 
 
+
     this.activeElementChangeEvent.emit(this.activeElementIndex)
 
+
+  }
+  removeItemFromWatchlist(watchlistId: string, stockId: string): Observable<any> {
+    let url = `http://localhost:8000/api/watchlist/${watchlistId}/${stockId}`
+    console.log("watchlistId : ", watchlistId, " stockId : ", stockId);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.token}`,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
+
+    });
+
+
+
+    return this.http.delete(url, { headers })
 
   }
   updateStocks(data: any) {
@@ -150,8 +186,8 @@ export class MarketWatchService {
     }
     this.stockListChanged.emit(this.stock_list);
     this.detailedListChanged.emit(this.detailedList)
-     
-    
+
+
 
 
   }
@@ -173,6 +209,39 @@ export class MarketWatchService {
   emitUpdateEvent() {
     this.activeElementChangeEvent.emit(this.activeElementIndex);
 
+  }
+  haveStocks(stockId: string): boolean {
+
+    let result = false;
+    console.log(" detailed before route  :", this.detailedList);
+
+    if (this.detailedList.length > 0) {
+      for (let stock of this.detailedList) {
+        if (stock.ID === stockId) {
+          console.log("id matched ");
+
+          result = true;
+
+        }
+      }
+    }
+    return result;
+
+  }
+  shouldAdd(symbol: string) {
+
+    let result = true;
+
+    for (let stock of this.detailedList) {
+      if (stock.Ticker === symbol) {
+        result = false;
+        break;
+
+
+      }
+
+    }
+    return result
   }
 
 

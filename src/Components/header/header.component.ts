@@ -83,15 +83,20 @@ export class HeaderComponent implements OnInit {
     let watchlistId = this.watchlistService.watchlist?.ID;
 
     // let watchlistId =this.route.snapshot.params['watchlistId']
-console.log("watchlistId in header : ",watchlistId);
+    console.log("watchlistId in header : ", watchlistId);
 
 
 
-    this.marketWatchServeice.addStockToWatchList(this.enteredSymbol.value['symbol'], watchlistId!).subscribe((response) => {
-      this.marketWatchServeice.add_to_stock_list(response.stockAdded);
-      // this.
+    if (this.marketWatchServeice.shouldAdd(this.enteredSymbol.value['symbol']))
+      this.marketWatchServeice.addStockToWatchList(this.enteredSymbol.value['symbol'], watchlistId!).subscribe((response) => {
+        this.marketWatchServeice.add_to_stock_list(response.stockAdded);
+        // this.
 
-    })
+      })
+    else {
+      alert("this symbol is already ")
+    }
+
     // this.marketWatchServeice.add_to_stock_list(this.enteredSymbol.value['symbol'])
 
 
@@ -131,7 +136,7 @@ console.log("watchlistId in header : ",watchlistId);
   LogoutUser() {
 
     this.authService.logout();
-    
+
 
   }
 

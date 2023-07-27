@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
 import { MarketWatchService } from 'src/Services/market-watch.service';
@@ -33,7 +33,11 @@ export class MarketDepthComponent implements OnInit {
 
 
 
-  constructor(private watchlistService: WatchlistService, private marketWatchService: MarketWatchService, private http: HttpClient,
+  constructor(
+    private router: Router,
+    private watchlistService: WatchlistService,
+    private marketWatchService: MarketWatchService,
+    private http: HttpClient,
     private route: ActivatedRoute
   ) {
 
@@ -131,11 +135,34 @@ export class MarketDepthComponent implements OnInit {
   removeStockFromList() {
     console.log("remove  is called ");
 
-    if (this.index != -1)
-      this.marketWatchService.removeItem(this.index);
+    if (this.index != -1) {
+
+
+      this.route.params.subscribe((params) => {
+        let stockId = params['stockId'];
+        let watchlistId = this.watchlistService.watchlist?.ID;
+        this.marketWatchService.removeItemFromWatchlist(watchlistId!, stockId).subscribe((response) => {
+          // this.watchlistService.
+          this.marketWatchService.removeItem(this.index)
+          console.log( " list after update : ",this.marketWatchService.stock_list);
+          
+          this.closeCard()
+
+        })
+
+      })
+    }
 
 
   }
+  closeCard() {
+    let wid = this.watchlistService.watchlist;
+    let path = '/watchlist/' + wid?.ID
+
+    this.router.navigate([path])
+
+  }
+
 
   startUpdateData(): void {
 

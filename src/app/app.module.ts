@@ -36,6 +36,7 @@ import { AuthGaurdService } from 'src/Services/AuthService/auth-gaurd.service';
 import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-warning/error-warning.component';
 import { UnAuthGaurdService } from 'src/Services/AuthService/un-auth-gaurd.service';
 import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-card/welcome-card.component';
+import { StockRouteGaurdService } from 'src/Services/StockGaurd/stock-route.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-c
     AuthService,
     WatchlistService,
     AuthGaurdService,
-    UnAuthGaurdService
+    UnAuthGaurdService,
+    StockRouteGaurdService
   ],
   bootstrap: [AppComponent]
 })
