@@ -42,7 +42,7 @@ export class MarketWatchComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.watchlistService.getAllStocksInWatchList(this.route.snapshot.params['watchlistId']).subscribe(
+    this.watchlistService.getAllStocksInWatchList(this.watchlistService.watchlist?.ID!).subscribe(
       (response) => {
 
         console.log("response : ", response);

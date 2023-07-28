@@ -100,6 +100,21 @@ font-family: 'Silkscreen', cursive;
 
 
             }
+            
+            .error-control {
+                display: flex;
+                color: rgb(197, 40, 40);
+                background-color: rgb(247, 247, 247);
+                border-radius: 8px;
+                padding: 0px 0.8rem;
+
+                p {
+                    font-family: 'Montserrat', sans-serif;
+                    text-transform: capitalize;
+                    font-size: 0.75rem;
+                    font-weight: 400;
+                }
+            }
         }
     }
     .login-container:hover{

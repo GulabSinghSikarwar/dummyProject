@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/Services/AuthService/auth-service.service';
 import { WatchlistService } from 'src/Services/WatchlistService/watchlist.service';
@@ -15,8 +15,8 @@ export class LoginComponent {
 
   loginForm = new FormGroup({
 
-    "email": new FormControl(''),
-    "password": new FormControl('')
+    "email": new FormControl('', [Validators.required, Validators.email]),
+    "password": new FormControl('', [Validators.required])
   })
 
   constructor(private router: Router, private authService: AuthService,
@@ -29,6 +29,11 @@ export class LoginComponent {
       email: this.loginForm.get("email")!.value!,
       password: this.loginForm.get("password")!.value!,
     }
+    // controls.email.status
+    console.log(" form : ");
+    
+    console.log(this.loginForm);
+
 
     this.authService.login(body).subscribe(
       (response: {

@@ -109,7 +109,7 @@ export class MarketWatchService {
     // });
 
     // return this.http.post(url, { stockSymbol: symbol }, { headers });
-    return this.http.post(url, { stockSymbol: symbol } );
+    return this.http.post(url, { stockSymbol: symbol });
 
 
 
@@ -177,6 +177,12 @@ export class MarketWatchService {
 
     this.stock_list = [];
     this.detailedList = [];
+    if (data && data.length > 0) {
+
+    }
+    else {
+      return
+    }
 
     for (let stock of data) {
       this.stock_list.push({
