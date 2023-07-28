@@ -44,13 +44,14 @@ export class WatchlistService {
 
   }
   getAllStocksInWatchList(watchlistId: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.token}`,
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true'
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${this.authService.token}`,
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Credentials': 'true'
 
-    });
-    return this.http.get(`http://localhost:8000/api/watchlist/${watchlistId}`, { headers })
+    // });
+    // return this.http.get(`http://localhost:8000/api/watchlist/${watchlistId}`, { headers })
+    return this.http.get(`http://localhost:8000/api/watchlist/${watchlistId}`,)
   }
 
   getStockById(watchlistId: string, stockId: string): Observable<any> {
@@ -67,13 +68,13 @@ export class WatchlistService {
 
   initiateUser(token: string) {
     let url = `http://localhost:8000/api/watchlist/`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.token}`,
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true'
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${this.authService.token}`,
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Credentials': 'true'
 
-    });
-    return this.http.get(url, { headers })
+    // });
+    return this.http.get(url, )
 
 
 

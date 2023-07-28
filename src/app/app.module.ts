@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +37,7 @@ import { ErrorWarningComponent } from 'src/Components/Utils/ErrorMessage/error-w
 import { UnAuthGaurdService } from 'src/Services/AuthService/un-auth-gaurd.service';
 import { WelcomeCardComponent } from 'src/Components/Utils/WelcomeCard/welcome-card/welcome-card.component';
 import { StockRouteGaurdService } from 'src/Services/StockGaurd/stock-route.service';
+import { AuthInterceptorService } from 'src/Services/WatchlistService/INTERCEPTOR/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,12 @@ import { StockRouteGaurdService } from 'src/Services/StockGaurd/stock-route.serv
     WatchlistService,
     AuthGaurdService,
     UnAuthGaurdService,
-    StockRouteGaurdService
+    StockRouteGaurdService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

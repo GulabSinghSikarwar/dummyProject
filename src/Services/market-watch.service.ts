@@ -101,14 +101,15 @@ export class MarketWatchService {
 
 
     let url = `http://localhost:8000/api/watchlist/${watchlistId}`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.token}`,
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true'
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${this.authService.token}`,
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Credentials': 'true'
 
-    });
+    // });
 
-    return this.http.post(url, { stockSymbol: symbol }, { headers });
+    // return this.http.post(url, { stockSymbol: symbol }, { headers });
+    return this.http.post(url, { stockSymbol: symbol } );
 
 
 
